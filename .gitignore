@@ -1,2 +1,5 @@
-my_venv_for_telegram_bot
+my_venv_for_telegram_bot/
 .env
+__pycache__/
+.mypy_cache/
+config/__pycache__
