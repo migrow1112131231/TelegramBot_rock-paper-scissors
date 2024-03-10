@@ -1,25 +1,16 @@
 import asyncio
-import logging
-from config import load_config, Config
+from config import add_config, Config
 from aiogram import Bot, Dispatcher
-from handlers import other_handlers, user_handlers
+from handlers import user_handlers, other_handlers
+from keyboards import main_menu
 
-logger = logging.getLogger(__name__)
 
-
-async def main() -> None:
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(filename)s:%(lineno)d #%(levelname)-8s '
-               '[%(asctime)s] - %(name)s - %(message)s')
-
-    # Выводим в консоль информацию о начале запуска бота
-    logger.info('Starting bot')
-
-    config: Config = load_config()
-
-    bot: str = Bot(token=config.telegram_bot.token, parse_mode='HTML')
+async def main():
+    config: Config = add_config()
+    bot = Bot(token=config.telegram_bot.token, parse_mode='HTML')
     dp = Dispatcher()
+    await main_menu(bot=bot)
+
 
     dp.include_router(user_handlers.router)
     dp.include_router(other_handlers.router)
