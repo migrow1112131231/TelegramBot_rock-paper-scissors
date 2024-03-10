@@ -17,6 +17,14 @@ async def process_start_command(message: Message):
 async def process_help_command(message: Message):
     await message.answer(text=LEXICON_RU['/help'], reply_markup=yes_no_keyboard)
 
+@router.message(F.text == '/contacts')
+async def process_command_contacts(message: Message):
+    await message.answer(text=LEXICON_RU['/contacts'])
+
+@router.message(F.text == '/info')
+async def process_command_info(message: Message):
+    await message.answer(text=LEXICON_RU['/info'])
+
 @router.message(F.text == LEXICON_RU['yes_button'])
 async def process_yes_answer(message: Message):
     await message.answer(text=random.choice(LEXICON_RU['yes']), reply_markup=game_keyboard)
