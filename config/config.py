@@ -2,23 +2,19 @@ from environs import Env
 from dataclasses import dataclass
 
 @dataclass
-class TelegramBot:
+class Telegram_Bot:
     token: str
-    admin_ids: 'list[int]'
-
-#db
+    admins: 'list[int]'
 
 @dataclass
 class Config:
-    telegram_bot: TelegramBot
-    #db
+    telegram_bot: Telegram_Bot
 
-def load_config() -> Config:
-
+def add_config() -> Config:
     env = Env()
     env.read_env()
 
-    return Config(telegram_bot=TelegramBot(
+    return Config(telegram_bot=Telegram_Bot(
         token=env('BOT_TOKEN'),
-        admin_ids=list(map(int, env.list('ADMINS')))
+        admins=list(map(int, env.list('ADMINS')))
     ))
